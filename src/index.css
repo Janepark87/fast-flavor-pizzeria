@@ -3,7 +3,7 @@
 
 @layer components {
 	.input {
-		@apply w-full rounded-md border border-stone-200 px-4 py-2 transition-all duration-300 placeholder:text-stone-400 focus:outline-none focus:ring focus:ring-yellow-400;
+		@apply w-full rounded-md border border-stone-200 px-4 py-2 placeholder:text-stone-400 focus:border-yellow-400 focus:outline-none focus:ring-1 focus:ring-yellow-400;
 	}
 
 	.input-group {
@@ -84,7 +84,7 @@
 }
 
 .btn {
-	@apply inline-block rounded-full font-semibold uppercase tracking-wide transition-colors duration-300 focus:outline-none focus:ring focus:ring-offset-2 disabled:cursor-not-allowed;
+	@apply inline-block rounded-full font-semibold uppercase tracking-wide transition-colors duration-300 focus:outline-none focus:ring-1 focus:ring-offset-1 disabled:cursor-not-allowed;
 }
 
 .btn-primary {

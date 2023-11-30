@@ -2,6 +2,7 @@ import { Form, redirect, useActionData, useNavigation } from 'react-router-dom';
 import { createOrder } from '../../services/apiRestaurant';
 import { isValidPhone } from '../../utils/helpers';
 import Button from '../../components/Button';
+import { useSelector } from 'react-redux';
 
 const fakeCart = [
 	{
@@ -31,6 +32,7 @@ export default function CreateOrder() {
 	const navigation = useNavigation();
 	const isSubmitting = navigation.state === 'submitting';
 	const formErrors = useActionData();
+	const username = useSelector((store) => store.user.username);
 
 	const cart = fakeCart;
 
@@ -42,7 +44,7 @@ export default function CreateOrder() {
 				<div className="input-group">
 					<label>First Name</label>
 					<div>
-						<input type="text" className="input" name="customer" required />
+						<input type="text" className="input" name="customer" defaultValue={username} required />
 					</div>
 				</div>
 				<div className={`input-group ${formErrors?.phone ? 'error' : ''}`}>
@@ -64,9 +66,9 @@ export default function CreateOrder() {
 						name="priority"
 						id="priority"
 						value="on"
-						className="h-6 w-6 accent-yellow-400 focus:outline-none focus:ring focus:ring-yellow-400 focus:ring-offset-2"
+						className="focus:ring-yellow-4001 h-6 w-6 cursor-pointer accent-yellow-400 focus:outline-none"
 					/>
-					<label htmlFor="priority" className="font-medium">
+					<label htmlFor="priority" className="cursor-pointer font-medium">
 						Want to yo give your order priority?
 					</label>
 				</div>

@@ -1,6 +1,7 @@
 import { Form, redirect, useActionData, useNavigation } from 'react-router-dom';
 import { createOrder } from '../../services/apiRestaurant';
 import { isValidPhone } from '../../utils/helpers';
+import Button from '../../components/Button';
 
 const fakeCart = [
 	{
@@ -34,41 +35,47 @@ export default function CreateOrder() {
 	const cart = fakeCart;
 
 	return (
-		<div>
-			<h2>Ready to order? Let's go!</h2>
+		<div className="px-4 py-6">
+			<h2 className="mb-8 text-xl font-semibold">Ready to order? Let's go!</h2>
 
 			<Form method="POST">
-				<div>
+				<div className="input-group">
 					<label>First Name</label>
-					<input type="text" name="customer" required />
+					<div>
+						<input type="text" className="input" name="customer" required />
+					</div>
 				</div>
-
-				<div>
+				<div className={`input-group ${formErrors?.phone ? 'error' : ''}`}>
 					<label>Phone number</label>
 					<div>
-						<input type="tel" name="phone" required />
+						<input type="tel" className="input" name="phone" required />
+						{formErrors?.phone && <small>{formErrors.phone}</small>}
 					</div>
-					{formErrors?.phone && <p>{formErrors.phone}</p>}
 				</div>
-
-				<div>
+				<div className="input-group">
 					<label>Address</label>
 					<div>
-						<input type="text" name="address" required />
+						<input type="text" className="input" name="address" required />
 					</div>
 				</div>
-
-				<div>
-					<input type="checkbox" name="priority" id="priority" value="on" />
-					<label htmlFor="priority">Want to yo give your order priority?</label>
+				<div className="input-checkbox">
+					<input
+						type="checkbox"
+						name="priority"
+						id="priority"
+						value="on"
+						className="h-6 w-6 accent-yellow-400 focus:outline-none focus:ring focus:ring-yellow-400 focus:ring-offset-2"
+					/>
+					<label htmlFor="priority" className="font-medium">
+						Want to yo give your order priority?
+					</label>
 				</div>
 
-				<input type="hidden" name="cart" value={JSON.stringify(cart)} />
-
 				<div>
-					<button type="submit" disabled={isSubmitting}>
+					<input type="hidden" name="cart" value={JSON.stringify(cart)} />
+					<Button type="submit" disabled={isSubmitting}>
 						{isSubmitting ? 'Placing order...' : 'Order now'}
-					</button>
+					</Button>
 				</div>
 			</Form>
 		</div>
@@ -92,6 +99,7 @@ export async function action({ request }) {
 	if (Object.keys(errors).length > 0) return errors;
 
 	// If everything is okay, create a new order and redirect
-	const newOrder = await createOrder(order);
-	return redirect(`/order/${newOrder.id}`);
+	// const newOrder = await createOrder(order);
+	// return redirect(`/order/${newOrder.id}`);
+	return null;
 }

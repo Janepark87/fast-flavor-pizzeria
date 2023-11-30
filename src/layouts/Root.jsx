@@ -8,13 +8,15 @@ export default function Root() {
 	const isLoading = navigation.state === 'loading';
 
 	return (
-		<div className="layout">
+		<div className="h-screen-dvh grid grid-rows-[auto_1fr_auto]">
 			{isLoading && <Loader />}
 
 			<Header />
 
-			<main>
-				<Outlet />
+			<main className="overflow-y-auto">
+				<div className="mx-auto max-w-3xl">
+					<Outlet />
+				</div>
 			</main>
 
 			<CartOverview />

@@ -100,7 +100,7 @@
 }
 
 .btn-link {
-	@apply text-sm text-blue-500 hover:text-blue-600 hover:underline;
+	@apply text-sm text-blue-500 hover:text-blue-600 hover:underline focus:ring-0 focus:ring-offset-0;
 }
 
 .btn-sm {

@@ -6,10 +6,12 @@ export default function OrderItem({ item, isLoadingIngredients, ingredients }) {
 	return (
 		<li className="py-3">
 			<div className="flex items-center justify-between gap-4 text-sm">
-				<p>
-					<span className="font-medium">{quantity}&times;</span> {name}
-				</p>
-				<p className="font-medium">{formatCurrency(totalPrice)}</p>
+				<p>{name}</p>
+
+				<div className="flex items-center gap-4">
+					<span className="font-medium">{quantity}&times;</span>
+					<p className="font-medium">{formatCurrency(totalPrice)}</p>
+				</div>
 			</div>
 		</li>
 	);

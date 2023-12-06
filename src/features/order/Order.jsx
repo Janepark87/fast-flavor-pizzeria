@@ -8,8 +8,6 @@ export default function Order() {
 	const { id, status, priority, priorityPrice, orderPrice, estimatedDelivery, cart } = order;
 	const deliveryIn = calcMinutesLeft(estimatedDelivery);
 
-	console.log(cart);
-
 	return (
 		<div className="space-y-8 px-4 py-6">
 			<div className="flex flex-wrap items-center justify-between gap-2">

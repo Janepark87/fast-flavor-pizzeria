@@ -7,7 +7,7 @@
 	}
 
 	.input-group {
-		@apply mb-5 flex flex-col gap-2 sm:flex-row sm:items-center;
+		@apply mb-5 flex flex-col gap-2 sm:flex-row sm:items-baseline;
 	}
 
 	.input-group > label {
@@ -23,7 +23,11 @@
 	}
 
 	.input-group.error input {
-		@apply mb-1 border-red-700;
+		@apply border-red-700;
+	}
+
+	.input-group.error small {
+		@apply mt-1;
 	}
 
 	.input-checkbox {
@@ -101,6 +105,10 @@
 
 .btn-link {
 	@apply text-sm text-blue-500 hover:text-blue-600 hover:underline focus:ring-0 focus:ring-offset-0;
+}
+
+.btn-xs {
+	@apply px-3 py-1.5 text-[10px] sm:px-4 sm:py-2 sm:text-xs;
 }
 
 .btn-sm {

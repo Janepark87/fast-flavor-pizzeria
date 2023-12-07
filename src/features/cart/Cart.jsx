@@ -11,7 +11,6 @@ export default function Cart() {
 	const cart = useSelector(getCart);
 
 	if (!cart.length) return <EmptyCart />;
-
 	return (
 		<div className="px-4 py-3">
 			<LinkButton to="/menu">&larr; Back to menu</LinkButton>

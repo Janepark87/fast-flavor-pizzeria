@@ -1,21 +1,25 @@
 import { useState } from 'react';
 import { Form, redirect, useActionData, useNavigation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createOrder } from '../../services/apiRestaurant';
 import { formatCurrency, isValidPhone } from '../../utils/helpers';
 import { clearCart, getCart, getTotalCartPrice } from '../../store/cart/cartSlice';
+import { fetchAddress } from '../../store/user/userSlice';
+import store from '../../store/store';
 import Button from '../../components/Button';
 import EmptyCart from '../cart/EmptyCart';
-import store from '../../store/store';
 
 export default function CreateOrder() {
+	const dispatch = useDispatch();
 	const [withPriority, setWithPriority] = useState('off');
 	const navigation = useNavigation();
 	const isSubmitting = navigation.state === 'submitting';
 	const formErrors = useActionData();
-	const username = useSelector((store) => store.user.username);
-	const cart = useSelector(getCart);
 
+	const { username, status: addressStatus, position, address, error: errorAddress } = useSelector((store) => store.user);
+	const isLoadingAddress = addressStatus === 'loading';
+
+	const cart = useSelector(getCart);
 	const totalCartPrice = useSelector(getTotalCartPrice);
 	const priorityPrice = withPriority ? totalCartPrice * 0.2 : 0;
 	const totalPrice = totalCartPrice + priorityPrice;
@@ -40,10 +44,28 @@ export default function CreateOrder() {
 						{formErrors?.phone && <small>{formErrors.phone}</small>}
 					</div>
 				</div>
-				<div className="input-group">
+				<div className={`input-group ${addressStatus === 'error' ? 'error' : ''}`}>
 					<label>Address</label>
 					<div>
-						<input type="text" className="input" name="address" required />
+						<div className="relative">
+							<input type="text" className="input" name="address" defaultValue={address} disabled={isLoadingAddress} required />
+
+							{!position.latitude && !position.longitude && (
+								<Button
+									size="xs"
+									className="absolute right-2 top-1/2 z-50 translate-y-[-50%] rounded-md sm:right-1"
+									onClick={(e) => {
+										e.preventDefault();
+										dispatch(fetchAddress());
+									}}
+									disabled={isLoadingAddress}
+								>
+									{isLoadingAddress ? 'Getting...' : 'Get Position'}
+								</Button>
+							)}
+						</div>
+
+						{addressStatus === 'error' && <small>{errorAddress}</small>}
 					</div>
 				</div>
 				<div className="input-checkbox">
@@ -62,7 +84,9 @@ export default function CreateOrder() {
 
 				<div>
 					<input type="hidden" name="cart" value={JSON.stringify(cart)} />
-					<Button type="submit" disabled={isSubmitting}>
+					<input type="hidden" name="position" value={position.latitude && position.longitude ? `${position.latitude}, ${position.longitude}` : ''} />
+
+					<Button type="submit" disabled={isSubmitting || isLoadingAddress}>
 						{isSubmitting ? 'Placing order...' : `Order now (${formatCurrency(totalPrice)})`}
 					</Button>
 				</div>

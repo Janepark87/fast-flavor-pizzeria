@@ -1,32 +1,14 @@
 const API_URL = import.meta.env.DEV ? '/api' : '/fast-flavor-pizzeria/api';
 
 export async function getMenu() {
-	try {
-		const res = await fetch(`${API_URL}/menu`);
+	const res = await fetch(`${API_URL}/menu`);
 
-		if (!res.ok) {
-			const errorData = await res.json();
-			console.error('Error in getMenu:', errorData);
-			throw Error('Failed getting menu');
-		}
+	// fetch won't throw error on 400 errors (e.g. when URL is wrong), so we need to do it manually. This will then go into the catch block, where the message is set
+	if (!res.ok) throw Error('Failed getting menu');
 
-		const { data } = await res.json();
-		return data;
-	} catch (error) {
-		console.error('Error in getMenu:', error.message);
-		throw Error('Failed getting menu');
-	}
+	const { data } = await res.json();
+	return data;
 }
-
-// export async function getMenu() {
-// 	const res = await fetch(`${API_URL}/menu`);
-
-// 	// fetch won't throw error on 400 errors (e.g. when URL is wrong), so we need to do it manually. This will then go into the catch block, where the message is set
-// 	if (!res.ok) throw Error('Failed getting menu');
-
-// 	const { data } = await res.json();
-// 	return data;
-// }
 
 export async function getOrder(id) {
 	const res = await fetch(`${API_URL}/order/${id}`);

@@ -5,21 +5,17 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ command, mode }) => {
 	const env = loadEnv(mode, process.cwd(), '');
 	const config = {
-		base: '/',
+		base: command === 'serve' ? '/' : '/fast-flavor-pizzeria/',
 		plugins: [react()],
 		server: {
 			proxy: {
 				'/api': {
-					target: env.PIZZA_MENU_API_URL,
+					target: command === 'serve' ? env.PIZZA_MENU_API_URL : '',
 					changeOrigin: true,
 				},
 			},
 		},
 	};
-
-	if (command !== 'serve') {
-		config.base = '/fast-flavor-pizzeria/';
-	}
 
 	return config;
 });

@@ -10,7 +10,7 @@ export default defineConfig(({ command, mode }) => {
 		server: {
 			proxy: {
 				'/api': {
-					target: command === 'serve' ? env.PIZZA_MENU_API_URL : env.PIZZA_MENU_API_URL,
+					target: env.PIZZA_MENU_API_URL,
 					changeOrigin: true,
 				},
 			},

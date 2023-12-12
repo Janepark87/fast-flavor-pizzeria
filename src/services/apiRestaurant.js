@@ -1,7 +1,7 @@
 const API_URL = import.meta.env.DEV ? '/api' : '/fast-flavor-pizzeria/api';
 
 export async function getMenu() {
-	const res = await fetch(`${BASIC_URL}/menu`);
+	const res = await fetch(`${API_URL}/menu`);
 
 	if (!res.ok) {
 		throw Error('Failed getting menu');
@@ -12,7 +12,7 @@ export async function getMenu() {
 }
 
 export async function getOrder(id) {
-	const res = await fetch(`${BASIC_URL}/order/${id}`);
+	const res = await fetch(`${API_URL}/order/${id}`);
 	if (!res.ok) throw Error(`Couldn't find order #${id}`);
 
 	const { data } = await res.json();
@@ -21,7 +21,7 @@ export async function getOrder(id) {
 
 export async function createOrder(newOrder) {
 	try {
-		const res = await fetch(`${BASIC_URL}/order`, {
+		const res = await fetch(`${API_URL}/order`, {
 			method: 'POST',
 			body: JSON.stringify(newOrder),
 			headers: {
@@ -39,7 +39,7 @@ export async function createOrder(newOrder) {
 
 export async function updateOrder(id, updateObj) {
 	try {
-		const res = await fetch(`${BASIC_URL}/order/${id}`, {
+		const res = await fetch(`${API_URL}/order/${id}`, {
 			method: 'PATCH',
 			body: JSON.stringify(updateObj),
 			headers: {

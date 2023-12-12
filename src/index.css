@@ -50,7 +50,7 @@
 	.loader {
 		width: 45px;
 		aspect-ratio: 0.75;
-		--c: no-repeat linear-gradient(theme(colors.stone.800) 0 0);
+		--c: no-repeat linear-gradient(theme(colors.yellow.500) 0 0);
 		background:
 			var(--c) 0% 50%,
 			var(--c) 50% 50%,
@@ -83,6 +83,30 @@
 				0% 50%,
 				50% 50%,
 				100% 100%;
+		}
+	}
+
+	.spin-container {
+		@apply flex h-16 w-16 items-center justify-center rounded-md bg-stone-200 object-cover sm:h-20 sm:w-20;
+	}
+	.spin {
+		@apply w-6 sm:w-8;
+		--b: 6px; /* the border thickness */
+		--bc: theme(colors.stone.600);
+		aspect-ratio: 1;
+		border-radius: 50%;
+		padding: 1px;
+		background: conic-gradient(#0000 10%, var(--bc)) content-box;
+		-webkit-mask: repeating-conic-gradient(#0000 0deg, #000 1deg 20deg, #0000 21deg 36deg),
+			radial-gradient(farthest-side, #0000 calc(100% - var(--b) - 1px), #000 calc(100% - var(--b)));
+		-webkit-mask-composite: destination-in;
+		mask-composite: intersect;
+		animation: spinning 1s infinite steps(10);
+	}
+
+	@keyframes spinning {
+		to {
+			transform: rotate(1turn);
 		}
 	}
 }

@@ -14,7 +14,7 @@ export default function MenuItem({ pizza }) {
 	const handleAddToCart = () => {
 		const newItem = {
 			pizzaId: id,
-			name: name,
+			name,
 			quantity: 1,
 			unitPrice,
 			totalPrice: unitPrice * 1,
@@ -26,7 +26,7 @@ export default function MenuItem({ pizza }) {
 
 	return (
 		<li className="flex gap-4 py-2">
-			<img src={imageUrl} alt={name} className={`h-24 w-24 rounded-md object-cover ${soldOut ? 'opacity-70 grayscale' : ''}`} />
+			<img src={imageUrl} alt={name} className={`h-24 w-24 rounded-md object-cover text-xs ${soldOut ? 'opacity-70 grayscale' : ''}`} />
 
 			<div className="flex grow flex-col gap-2 pt-0.5">
 				<div>

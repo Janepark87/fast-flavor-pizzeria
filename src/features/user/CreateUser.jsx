@@ -5,10 +5,10 @@ import { updateName } from '../../store/user/userSlice';
 import Button from '../../components/Button';
 
 export default function CreateUser() {
-	const inputName = useRef();
-	const [username, setUsername] = useState('');
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const inputName = useRef();
+	const [username, setUsername] = useState('');
 
 	useEffect(() => inputName.current.focus(), []);
 

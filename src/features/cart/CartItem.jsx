@@ -10,7 +10,7 @@ export default function CartItem({ item }) {
 
 	return (
 		<li className="flex gap-3 py-3 sm:gap-4 sm:py-4">
-			<img src={imageUrl} alt={name} className="h-16 w-16 rounded-md object-cover sm:h-20 sm:w-20" />
+			<img src={imageUrl} alt={name} className="h-16 w-16 rounded-md object-cover text-xs sm:h-20 sm:w-20" />
 
 			<div className="flex grow flex-col gap-2 pt-0.5 sm:gap-4">
 				<div className="flex items-center justify-between gap-2">

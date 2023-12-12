@@ -39,6 +39,8 @@ const userSlice = createSlice({
 export const { updateName } = userSlice.actions;
 export default userSlice.reducer;
 
+export const getUser = (state) => state.user;
+
 export const fetchAddress = createAsyncThunk('user/fetchAddress', async () => {
 	// 1) We get the user's geolocation position
 	const positionObj = await getPosition();
@@ -52,5 +54,6 @@ export const fetchAddress = createAsyncThunk('user/fetchAddress', async () => {
 	const address = `${addressObj?.locality}, ${addressObj?.city} ${addressObj?.postcode}, ${addressObj?.countryName}`;
 
 	// 3) Then we return an object with the data that we are interested in
+	// payload state
 	return { position, address };
 });

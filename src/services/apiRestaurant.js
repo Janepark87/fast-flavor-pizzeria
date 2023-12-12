@@ -1,5 +1,4 @@
-// const API_URL = import.meta.env.DEV ? '/api' : `${import.meta.env.PIZZA_MENU_API_URL}/api`;
-const API_URL = 'https://react-fast-pizza-api.onrender.com/api';
+const API_URL = import.meta.env.DEV ? '/api' : `${import.meta.env.PIZZA_MENU_API_URL}/api`;
 
 export async function getMenu() {
 	const res = await fetch(`${API_URL}/menu`);

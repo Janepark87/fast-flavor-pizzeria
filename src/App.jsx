@@ -38,7 +38,7 @@ const router = createBrowserRouter(
 			],
 		},
 	],
-	{ basename: import.meta.env.DEV ? '/' : '/fast-flavor-pizzeria/' }
+	{ basename: import.meta.BASE_URL }
 );
 
 export default function App() {

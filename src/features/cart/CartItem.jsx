@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 import { getCurrentQuantityById } from '../../store/cart/cartSlice';
 import { formatCurrency } from '../../utils/helpers';
-import DeleteItem from './DeleteItem';
 import UpdateItemQuantity from './UpdateItemQuantity';
 
 export default function CartItem({ item }) {
@@ -18,10 +17,7 @@ export default function CartItem({ item }) {
 					<p className="text-sm font-bold sm:text-base">{formatCurrency(totalPrice)}</p>
 				</div>
 
-				<div className="mt-auto flex justify-end gap-2 sm:gap-4">
-					{currentQuantity !== 1 && <DeleteItem pizzaId={pizzaId} />}
-					<UpdateItemQuantity pizzaId={pizzaId} currentQuantity={currentQuantity} />
-				</div>
+				<UpdateItemQuantity pizzaId={pizzaId} currentQuantity={currentQuantity} />
 			</div>
 		</li>
 	);

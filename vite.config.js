@@ -15,6 +15,9 @@ export default defineConfig(({ command, mode }) => {
 				},
 			},
 		},
+		define: {
+			'process.env.VITE_PIZZA_MENU_API_URL': JSON.stringify(env.VITE_PIZZA_MENU_API_URL),
+		},
 	};
 
 	return config;
